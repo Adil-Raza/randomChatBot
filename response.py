@@ -1,12 +1,24 @@
-def sample_response(input_text):
-    user_message = str(input_text).lower()
+help={
+    'command': 'help',
+    'response': '''
+This bot is for anonymous chat with stranger.
 
-    if user_message in ("hello"):
-        return "hi"
+You can send text, gifs, stickers, photos, videos and voice messages.
 
-    if user_message in ("panda", "anupam"):
-        return "Panda bhsdka"
 
-    return f"{input_text} gandhu hai"
+/search: find new partner
+/stop: Stop current chat
+/help: To get Help menu
 
-    return "unable to precess"
+
+If you have any queries, reach out to us
+@support
+'''
+}
+
+start={
+    'command': 'start',
+    'response': 'Press /search to find partner. /help for help'
+}
+
+
