@@ -2,6 +2,7 @@ from randomChat import RandomChat
 import response
 from constantMessages import *
 from telegram import *
+from utils import Utils
 
 class Handlers:
     chat = RandomChat()
@@ -10,30 +11,33 @@ class Handlers:
     def start_command(update, context):
         Handlers.chat.add_user(update)
         print('new User: ', update)
-        Handlers.chat.send_message(update.message, response.start['response'])
+
+        Handlers.chat.send_message2(update, context, response.start['response'])
 
     @staticmethod
     def help_command(update, context):
-        Handlers.chat.send_help_menu(update)
+        Handlers.chat.send_help_menu(update, context)
 
     @staticmethod
     def search_command(update, context):
-        Handlers.chat.send_message(update.message, SEARCHING)
+        Handlers.chat.send_message2(update, context, SEARCHING)
 
         idle_user_details = Handlers.chat.search_idle_user()
         if idle_user_details is not None:
-            Handlers.chat.connect_new_user_to_idle_user(update, idle_user_details)
+            Handlers.chat.connect_new_user_to_idle_user(update, context, idle_user_details)
         else:
             Handlers.chat.add_new_idle_user(update)
-            Handlers.chat.send_message(update.message, WAIT)
+            Handlers.chat.send_message2(update, context, WAIT)
 
     @staticmethod
     def stop_command(update, context):
-        Handlers.chat.disconnect_user(update)
+        Handlers.chat.disconnect_user(update, context)
 
     @staticmethod
     def next_command(update, context):
-        Handlers.chat.send_message(update.message, SEARCHING_NEXT)
+        Handlers.chat.send_message2(update, context, SEARCHING_NEXT)
+        Handlers.stop_command(update, context)
+        Handlers.search_command(update, context)
 
     @staticmethod
     def handle_message(update, context):

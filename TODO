@@ -1,0 +1,12 @@
+1. /next feature    : done
+2. if user in waiting state, /stop should push out from waiting state
+3. /search second time should not stop current dialog
+4. validation if user exist before every comand
+5. startup form fillup
+6. settings menu
+7. language save data
+8. DB support: save users to DB
+9. DB support: reload users to cache in case of server reboot
+10. multi language support
+11. language translation support
+12. user stats
